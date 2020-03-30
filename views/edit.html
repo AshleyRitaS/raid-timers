@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Raid Timers - Edit</title>
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/static/css/edit.css"/>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="module" src="/static/scripts/timers.js"></script>
+    <script type="module" src="/static/scripts/edit.js"></script>
+  </head>
+  <body>
+    <h1 class="title">Raid Timers - Editor</h1>
+    <div class="file-selector active">
+      <p>Please select a file to use as a starting point, or choose to start a new timer</p>
+      <div class="options">
+        <input type="file" id="start-with-file"/> 
+        <input type="button" value="Start Fresh" id="start-without-file"/>
+      </div>
+    </div>
+    <div class="editor inactive">
+      <table id="raid-timer" class="raid-timer">
+      </table>
+      <div class="save"><input type="button" id="save-timers" value="Save Timers"></div>
+      <div class="edit-element add">
+        <form id="submit-timer" action="/edit">
+            <input type="hidden" name="id">
+            <div>Time: <input required type="text" name="time"/></div>
+            <div>Name: <input required type="text" name="name"/></div>
+            <div>Type: 
+              <select required name="type">
+                <option selected value="Other">N/A</option>
+                <option value="Raidwide">Raidwide</option>
+                <option value="Tankbuster">Tankbuster</option>
+                <option value="Mechanic">Mechanic</option>
+              </select>
+            </div>
+            <div>Notes: <input type="text" required name="description"></div>
+            <div class="add"><input type="submit" value="Add timer"></div>
+            <div class="edit"><input type="submit" value="Edit timer"> <input id="cancel-edit" type="button" value="Cancel"></div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

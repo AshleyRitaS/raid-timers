@@ -1,0 +1,9 @@
+.inactive {
+    display:none;
+}
+.edit .add {
+    display:none;
+}
+.add .edit {
+    display:none;
+}
