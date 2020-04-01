@@ -5,10 +5,13 @@
     function setForm(values) {
         var form = $('#submit-timer');
         if (!values) {
-            values = {type:'Other'};
+            values = {
+                type:'Other',
+                display:{time:''}
+            };
         }
         form.find('input[name="id"]').val(values.id);
-        form.find('input[name="time"]').val(values.time);
+        form.find('input[name="time"]').val(values.display.time);
         form.find('input[name="name"]').val(values.name);
         form.find('select[name="type"]').val(values.type);
         form.find('input[name="description"]').val(values.description);
@@ -102,22 +105,21 @@
             createTable(timers.all());
             switchToEditor();
         });
-        $('#submit-timer').submit(function() {
+        $('#submit-timer').submit(function(evt) {
             var inputs = $(this).serializeArray();
             var values = {}
             inputs.forEach(function (value) {
                 values[value.name] = value.value;
             })
             if (values.id === '' || !values.id) {
-                console.log('no id');
                 timers.add(values);
                 createTable(timers.all());
             } else {
-                console.log('id' + values.id);
                 timers.edit(parseInt(values.id), values);
                 createTable(timers.all());
             }
             switchToAdd();
+            evt.preventDefault();
             return false;
         });
         $('#cancel-edit').click(function() {

@@ -11,11 +11,11 @@
     background-color: aqua;
 }
 .current.Mechanic {
-    background-color: goldenrod;
+    background-color: rgb(208, 223, 8);
 }
 .current.Raidwide {
-    background-color: fuchsia;
+    background-color: rgb(245, 101, 101);
 }
 .current.Tankbuster {
-    background-color: greenyellow;
+    background-color: rgb(238, 166, 58);
 }

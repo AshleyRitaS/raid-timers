@@ -152,7 +152,7 @@
             if (data !== null) {
                 data.forEach(function(row) {
                    formattedData.push({
-                        time : parseFloat(row[0]),
+                        time : row[0],
                         name : row[1],
                         type: row[2],
                         description : row[3]
@@ -211,7 +211,7 @@
         if (values) {
             var timer = {
                 id:nextID++,
-                time:Math.abs(Math.floor(values.time)),
+                time:parseTime(values.time),
                 name:values.name,
                 type:values.type,
                 description:values.description
@@ -229,7 +229,7 @@
         var successful = false;
         timerList.forEach(function(timer) {
             if (timer.id === id) {
-                timer.time = Math.floor(values.time);
+                timer.time = parseTime(values.time);
                 timer.name = values.name;
                 timer.type = values.type;
                 timer.description = values.description;
@@ -271,6 +271,35 @@
             return null;
         } else {
             return timerList[indexToGet];
+        }
+    }
+
+    /*Parses time input into a float
+        Accepts time in seconds or as minutes:seconds
+        Returns a float representing the time in seconds
+    */
+    function parseTime(timeString) {
+        var timeArray;
+        var minutes;
+        var seconds;
+        if (timeString === null) {
+            return 0;
+        } else if (timeString.includes && timeString.includes(':')) {
+            timeArray = timeString.split(':');
+            minutes = parseInt(timeArray[0]);
+            seconds = parseFloat(timeArray[1]);
+            if (isNaN(minutes) || isNaN(seconds)) {
+                return 0;
+            } else {
+                return (minutes * 60) + seconds;
+            }
+        } else {
+            seconds = parseFloat(timeString);
+            if (isNaN(seconds)) {
+                return 0;
+            } else {
+                return seconds;
+            }
         }
     }
 
