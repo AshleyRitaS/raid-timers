@@ -3,7 +3,7 @@ var express = require('express'),
     morgan  = require('morgan');
 
 router.get('/', function(req, res) {
-    res.send('routing.js, test');
+    res.redirect('/view');
 })
 
 router.get('/edit', function(req, res) {
