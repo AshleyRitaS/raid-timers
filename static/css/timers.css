@@ -1,0 +1,21 @@
+.inactive {
+    display:none;
+}
+.edit .add {
+    display:none;
+}
+.add .edit {
+    display:none;
+}
+.current {
+    background-color: aqua;
+}
+.current.Mechanic {
+    background-color: goldenrod;
+}
+.current.Raidwide {
+    background-color: fuchsia;
+}
+.current.Tankbuster {
+    background-color: greenyellow;
+}

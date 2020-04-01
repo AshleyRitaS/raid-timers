@@ -1,4 +1,5 @@
 //requires timers.js
+//requires JQuery
 (function() {
 
     function setForm(values) {
@@ -41,7 +42,7 @@
         });
         $('a.delete-link').click(function() {
             timers.delete(parseInt($(this).data('id')));
-            createTable(timerList);
+            createTable(timers.all());
             switchToAdd();
         });
     }
@@ -73,8 +74,8 @@
                 file = fileList[0];
             else return false;
             reader.onload = function(evt) {
-                timers.loadFromJSON(evt.target.result);
-                if (timerList === null || timerList.length == 0) {
+                
+                if (!timers.loadFromJSON(evt.target.result)) {
                     return;
                 }
                 createTable(timers.all());

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Raid Timers - Edit</title>
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/static/css/timers.css"/>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="module" src="/static/scripts/timers.js"></script>
+    <script type="module" src="/static/scripts/view.js"></script>
+  </head>
+  <body>
+    <h1 class="title">Raid Timers - View</h1>
+    <div class="file-selector active">
+      <p>Please select a file to use as your timer</p>
+      <div class="options">
+        <input type="file" id="start-with-file"/> 
+      </div>
+    </div>
+    <div class="view active">
+        <div class="controls">
+            <input type="button" id="start-button" value="Start">
+            <input type="button" id="end-button" value="End">
+            <input type="button" id="reset-button" value="Reset">
+        </div>
+        <div class="countdown-selector">
+            <span>Countdown Duration: </span><input type="text" id="countdown-duration">
+        </div>
+        <div class="time-display">
+            <span id="current-time">0:00</span>
+        </div>
+      <table id="raid-timer" class="raid-timer">
+      </table>
+    </div>
+  </body>
+</html>

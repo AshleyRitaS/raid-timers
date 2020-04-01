@@ -82,7 +82,7 @@
         if (Array.isArray(input)) {
             timerList = [];
             nextID = 1;
-            inputTimers.forEach(timers.add);
+            input.forEach(timers.add);
             return true;
         } else {
             return false;
@@ -100,7 +100,7 @@
                 id : timer.id,
                 time : timer.time,
                 name : timer.name,
-                type : timer,type,
+                type : timer.type,
                 description : timer.description,
                 display : {
                     time : timer.display.time,
