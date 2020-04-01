@@ -74,6 +74,92 @@
         return timers.load(inputTimers);
     }
 
+    timers.loadFromCSV = (function() {
+        function parseCSV(input, delimiter = ',', enclosure = '"', newline = '\n') {
+            if (typeof input !== 'string' || input.length === 0) {
+                return null;
+            }
+            var chars = Array.from(input);
+            var charLength = chars.length;
+            var currentRow = [];
+            var currentField = [];
+            var data = [];
+            var inEnclosure = false;
+            var startOfField = true;
+            var foundEnclosureChar = false;
+            var enclosureEnded = false;
+            var currChar = '';
+            for (let index = 0; index < charLength; index++) {
+                currChar = chars[index];
+                if (startOfField) {
+                    currentField = [];
+                    startOfField = false;
+                    if (currChar === enclosure) {
+                        inEnclosure = true;
+                        continue;
+                    }
+                }
+                if (inEnclosure) {
+                    if (foundEnclosureChar) {
+                        if (currChar === enclosure) {
+                            foundEnclosureChar = false;
+                            currentField.push(enclosure);
+                            continue;
+                        } else {
+                            foundEnclosureChar = false;
+                            enclosureEnded = true;
+                            inEnclosure = false;
+                            index--;
+                            continue;
+                        }
+                    } else  if (currChar === enclosure) {
+                        foundEnclosureChar = true;
+                        continue;
+                    } else {
+                        currentField.push(currChar);
+                        continue;
+                    }
+                } else {
+                    if (currChar === delimiter || currChar === newline) {
+                        currentRow.push(currentField.join(''));
+                        startOfField = true;
+                        enclosureEnded = false;
+                        if (currChar === newline) {
+                            data.push(currentRow);
+                            currentRow = [];
+                        }
+                    } else {
+                        if (!enclosureEnded) {
+                            currentField.push(currChar);
+                        }
+                    }
+                }
+            }
+            currentRow.push(currentField.join(''));
+            data.push(currentRow);
+            console.log(data);
+            return data;
+        }
+
+        return function loadTimersFromCSV(input, delimiter = ',', enclosure = '"', newline = '\n') {
+            var data = parseCSV(input, delimiter, enclosure, newline);
+            var formattedData = [];
+            if (data !== null) {
+                data.forEach(function(row) {
+                   formattedData.push({
+                        time : parseFloat(row[0]),
+                        name : row[1],
+                        type: row[2],
+                        description : row[3]
+                    });
+                });
+                return timers.load(formattedData);
+            } else {
+                return false;
+            }
+        }
+    }());
+
     /*Loads timers from an array, containing entries formatted per the timer format at the top of this file, minus the display object
         All current timers will be destroyed by this operation.
         Returns true if successful, otherwise false.

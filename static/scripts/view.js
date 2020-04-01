@@ -187,8 +187,20 @@
             if (fileList.length)
                 file = fileList[0];
             else return false;
+            var type = file.name.split('.')[1];
             reader.onload = function(evt) {
-                if (!timers.loadFromJSON(evt.target.result)) {
+                if(type === 'json') {
+                    if (!timers.loadFromJSON(evt.target.result)) {
+                        alert('Failed to load');
+                        return;
+                    }
+                } else if (type === 'csv') {
+                    if (!timers.loadFromCSV(evt.target.result)) {
+                        alert('Failed to load');
+                        return;
+                    }
+                } else {
+                    alert('Invalid file extension; json or csv only');
                     return;
                 }
                 createTable();
