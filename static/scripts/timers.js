@@ -74,6 +74,11 @@
         return timers.load(inputTimers);
     }
 
+    /*Loads timers from a csv file. Each row represents one timer:
+        Time,Name,Type,Description
+        All current timers will be destroyed by this operation.
+        Returns true if successful, false otherwise
+    */
     timers.loadFromCSV = (function() {
         function parseCSV(input, delimiter = ',', enclosure = '"', newline = '\n') {
             if (typeof input !== 'string' || input.length === 0) {
