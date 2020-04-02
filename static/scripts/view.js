@@ -101,6 +101,9 @@
         resetAllRows();
         var newRow = $('#raid-timer tr[data-id='+ id + ']');
         newRow.addClass('current');
+        $('body,html').animate({
+            scrollTop:newRow.offset().top - ($(window).height() / 2)
+        });
     }
 
     //resets all current rows to their default state.
